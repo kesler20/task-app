@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Counter from "../components/counter/Counter";
 import TaskComponent from "../components/cards/TaskComponent";
 import CreateTaskCard from "../components/cards/CreateTaskCard";
-import { InitialTasksPlaceholder } from "../initialData";
-  
+import { InitialProgressPlaceholder } from "../initialData";
+
 interface IProgressTaskListProps {}
 
 const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
@@ -37,11 +37,11 @@ const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
       </div>
       <div className="position-relative text-center">
         <button
-          className="btn btn-primary"
+          className="btn btn-outline mt-2 text-bold"
           type="button"
           onClick={() => setDisplayCreateTaskCard((prevState) => !prevState)}
         >
-          Create Task<span className="dropdown-caret"></span>
+          Add a Task<span className="dropdown-caret"></span>
         </button>
         {displayCreateTaskCard && (
           <CreateTaskCard onCreateTask={handleCreateTask} />
@@ -49,7 +49,7 @@ const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
       </div>
       <div className="tasks__container border mt-3">
         {tasks.length === 0 ? (
-          <InitialTasksPlaceholder />
+          <InitialProgressPlaceholder />
         ) : (
           tasks.map((task, index) => {
             return <TaskComponent key={index} taskInfo={task} />;

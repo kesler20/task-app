@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Counter from "../components/counter/Counter";
 import TaskComponent from "../components/cards/TaskComponent";
 import CreateTaskCard from "../components/cards/CreateTaskCard";
-import { InitialTasksPlaceholder } from "../initialData";
+import { InitialBacklogPlaceholder } from "../initialData";
 import "./Tasklist.css";
 
 const BackLogTaskList = () => {
@@ -46,7 +46,7 @@ const BackLogTaskList = () => {
       </div>
       <div className="tasks__container border mt-3">
         {tasks.length === 0 ? (
-          <InitialTasksPlaceholder />
+          <InitialBacklogPlaceholder />
         ) : (
           tasks.map((task, index) => {
             return <TaskComponent key={index} taskInfo={task} />;

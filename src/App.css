@@ -22,6 +22,18 @@
   grid-gap: 20px;
 }
 
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.placeholder img {
+  width: 80%;
+}
+
 
 @media (max-width : 1200px) {
   .application__content {
