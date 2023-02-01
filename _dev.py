@@ -38,7 +38,7 @@ if __name__ == "__main__":
                         git.integrate_new_branch(sys.argv[3])
                     except:
                         git.integrate_new_branch()
-                        
+
                 elif sys.argv[2] == "gitignore":
                     git.generate_gitignore()
                 else:
@@ -47,8 +47,10 @@ if __name__ == "__main__":
             else:
                 print("try to run one of the following")
                 print("python _dev.py git t py -> to run the tests ")
-                print("python _dev.py git init <target_directory> -> to initialize a repo ")
-                print("python _dev.py git <any> <target_directory> -> to initialize a new branch ")
+                print(
+                    "python _dev.py git init <target_directory> -> to initialize a repo ")
+                print(
+                    "python _dev.py git <any> <target_directory> -> to initialize a new branch ")
 
         elif sys.argv[1] == "github":
             if sys.argv[2] == "issue":
@@ -112,14 +114,16 @@ if __name__ == "__main__":
             if sys.argv[2] == "create":
                 git.create_issues_from_readme()
             if sys.argv[2] == "read":
-                git.read_todos_from_readme()
+                git.read_Tasks_from_readme()
             if sys.argv[2] == "cross":
-                git.cross_todos_from_readme(sys.argv[3])
+                git.cross_Tasks_from_readme(sys.argv[3])
             else:
-                workflow_ui.pp("apply the following methods to interact with the readme 📰")
+                workflow_ui.pp(
+                    "apply the following methods to interact with the readme 📰")
                 print("create -> to create issues from the readme")
-                print("read -> to check all the readme todos")
-                print("cross -> tick all the todos that have been completed by passing their title")
+                print("read -> to check all the readme Tasks")
+                print(
+                    "cross -> tick all the Tasks that have been completed by passing their title")
 
         elif sys.argv[1] == "aws":
             if sys.argv[2] == "init":
@@ -165,9 +169,11 @@ if __name__ == "__main__":
                     #         op_sys.system("del workflow.py")
                     #     except FileExistsError:
                     #         pass
-                    osi = OperatingSystemInterface(os.path.join(osi.gcu(), "protocol", dir))
+                    osi = OperatingSystemInterface(
+                        os.path.join(osi.gcu(), "protocol", dir))
                     osi.copy_file_from_jaguar("_dev.py")
-                    osi.copy_folder_from_jaguar(os.path.join("src", "jaguar_backend"))
+                    osi.copy_folder_from_jaguar(
+                        os.path.join("src", "jaguar_backend"))
                     if index + 1 == len(os.listdir(os.path.join(osi.gcu(), "protocol"))):
                         workflow_ui.pp("Installation completed 😇")
 
@@ -196,7 +202,8 @@ if __name__ == "__main__":
 
         elif sys.argv[1] == "create-app":
             if sys.argv[2] == "py":
-                workflow_ui.pp("creating a new python application from its template 🐍✨")
+                workflow_ui.pp(
+                    "creating a new python application from its template 🐍✨")
                 os.system("git clone https://github.com/kesler20/test_setup")
                 application_dir = os.path.join(os.getcwd(), "test_setup")
                 op_sys = OperatingSystemInterface(application_dir)
@@ -215,13 +222,15 @@ if __name__ == "__main__":
                 os.chdir(os.getcwd())
 
             else:
-                workflow_ui.pp("creating a new javascript application from its template ☕✨")
+                workflow_ui.pp(
+                    "creating a new javascript application from its template ☕✨")
                 os.system("git clone https://github.com/kesler20/rta_template")
                 application_dir = os.path.join(os.getcwd(), "rta_template")
                 os.chdir(application_dir)
                 os.system("npm install")
                 os.chdir(os.getcwd())
-                os.system(f"rename {os.path.join(os.getcwd(),'rta_template')} {os.path.join(os.getcwd(),sys.argv[3])}")
+                os.system(
+                    f"rename {os.path.join(os.getcwd(),'rta_template')} {os.path.join(os.getcwd(),sys.argv[3])}")
 
         elif sys.argv[1] == "typescript":
             if sys.argv[2] == "init":
@@ -234,23 +243,23 @@ if __name__ == "__main__":
 
         elif sys.argv[1] == "create-env":
             osi.create_a_virtualenvironment(sys.argv[2])
-        
+
         elif sys.argv[1] == "i":
             osi.install_package(*sys.argv[2:])
-        
+
         elif sys.argv[1] == "setup-env":
             osi.setup_venv(*sys.argv[2:])
-        
+
         elif sys.argv[1] == "del-env":
             osi.delete_virtualenvironment(*sys.argv[2:])
 
         elif sys.argv[1] == "ci":
-            git.test_and_push_to_github(["_dev.py","git","t",*sys.argv[2:]])
+            git.test_and_push_to_github(["_dev.py", "git", "t", *sys.argv[2:]])
 
         else:
             # if no domain is passed this will be pushed to github
             git.push_to_github(sys.argv)
-        
+
     else:
         with open(os.path.join(osi.gcu(), "Protocol", "jaguar", "commands.txt"), "r") as f:
             for line in f.readlines():

@@ -1,15 +1,15 @@
 import * as React from "react";
-import { Todo } from "../../types";
+import { Task } from "../../types";
 
-interface ITodoProps {
-  todo: Todo;
+interface ITaskProps {
+  taskInfo: Task;
 }
 
-const TodoComponent: React.FunctionComponent<ITodoProps> = (props) => {
+const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
   return (
     <div className="border p-4">
       <div className="Subhead">
-        <h4 className="Subhead-heading">{props.todo.title}</h4>
+        <h4 className="Subhead-heading">{props.taskInfo.title}</h4>
       </div>
       <details className="details-overlay details-overlay-dark">
         <code className="d-block mt-1 mb-3 color-fg-muted">deadline</code>
@@ -20,11 +20,11 @@ const TodoComponent: React.FunctionComponent<ITodoProps> = (props) => {
           className="position-relative color-bg-default rounded p-3 mt-2"
           style={{ zIndex: 112 }}
         >
-          {props.todo.description}
+          {props.taskInfo.description}
         </div>
       </details>
     </div>
   );
 };
 
-export default TodoComponent;
+export default TaskComponent;

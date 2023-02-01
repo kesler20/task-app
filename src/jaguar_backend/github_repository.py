@@ -26,8 +26,10 @@ class GithubRepository:
         if repo is None:
             osi = OperatingSystemInterface()
             repo = osi.gcf()
-        print(f'gh repo edit https://github.com/kesler20/{repo} --description "{description}"')
-        os.system(f'gh repo edit https://github.com/kesler20/{repo} --description "{description}"')
+        print(
+            f'gh repo edit https://github.com/kesler20/{repo} --description "{description}"')
+        os.system(
+            f'gh repo edit https://github.com/kesler20/{repo} --description "{description}"')
         print(f"https://github.com/kesler20/{repo}")
 
     def run_tests(self, args: List[str]):
@@ -77,12 +79,15 @@ class GithubRepository:
                 for test_file in os.listdir(manual_test_folder):
                     try:
                         print(os.path.join(manual_test_folder, test_file))
-                        self.workflow_ui.pp(f"running the following test {test_file}")
-                        os.system(f"python {os.path.join(manual_test_folder,test_file)}")
+                        self.workflow_ui.pp(
+                            f"running the following test {test_file}")
+                        os.system(
+                            f"python {os.path.join(manual_test_folder,test_file)}")
                         self.workflow_ui.pp(f"test passed at {test_file} ✅")
                         test_passed.append(test_file)
                         for test_file_passed in test_passed:
-                            print("passed the following tests ✅", test_file_passed)
+                            print("passed the following tests ✅",
+                                  test_file_passed)
                     except:
                         self.workflow_ui.pp("ERROR found in:", test_file)
                         self.workflow_ui.pp(f"test passed at {test_file} ❌")
@@ -155,7 +160,8 @@ class GithubRepository:
 
         self.workflow_ui.pp("initializing the node environment 🟢NJS")
         os.system("npm init")
-        self.workflow_ui.pp("install the generate-gitignore globally and generate the gitignore 🔶.gitignore")
+        self.workflow_ui.pp(
+            "install the generate-gitignore globally and generate the gitignore 🔶.gitignore")
         os.system("npm install --global generate generate-gitignore")
         os.system("gen gitignore")
 
@@ -204,7 +210,7 @@ class GithubRepository:
     def close_issue(self, issueID: int) -> None:
         os.system(f"gh issue close {issueID}")
 
-    def integrate_new_branch(self, trunk_branch_name: str =None) -> None:
+    def integrate_new_branch(self, trunk_branch_name: str = None) -> None:
         """integrate_new_branch
 
         Note
@@ -223,11 +229,13 @@ class GithubRepository:
         """
         if trunk_branch_name is None:
             trunk_branch_name = "master"
-        self.workflow_ui.pp("checking out to master to pull the latest changed ⏬")
+        self.workflow_ui.pp(
+            "checking out to master to pull the latest changed ⏬")
         os.system(f"git checkout {trunk_branch_name}")
         os.system("git branch")
         os.system(f"git pull origin {trunk_branch_name}")
-        self.workflow_ui.pp("checking out to new-feature to pull the latest changed ⏬⏬")
+        self.workflow_ui.pp(
+            "checking out to new-feature to pull the latest changed ⏬⏬")
         self.workflow_ui.pp("")
         os.system("git checkout new-feature")
         os.system("git branch")
@@ -235,48 +243,54 @@ class GithubRepository:
         os.system("git add .")
         os.system('git commit -m "ready to merge"')
         os.system('git push --set-upstream origin new-feature')
-        self.workflow_ui.pp(f"checking out to {trunk_branch_name} to merge the new changes 👯‍♂️⭐💱")
+        self.workflow_ui.pp(
+            f"checking out to {trunk_branch_name} to merge the new changes 👯‍♂️⭐💱")
         self.workflow_ui.pp("")
         os.system(f"git checkout {trunk_branch_name}")
         os.system("git branch")
         os.system("git merge new-feature")
-        self.workflow_ui.pp(f"pushing the {trunk_branch_name} with the new feature ⤴️🤩✨")
+        self.workflow_ui.pp(
+            f"pushing the {trunk_branch_name} with the new feature ⤴️🤩✨")
         self.workflow_ui.pp("")
         os.system("git add .")
         os.system('git commit -m "merged new-feature"')
         os.system(f"git push origin {trunk_branch_name}")
-        self.workflow_ui.pp("deleting the new-feature branch locally and on gh🎯🗑️")
+        self.workflow_ui.pp(
+            "deleting the new-feature branch locally and on gh🎯🗑️")
         self.workflow_ui.pp("")
         os.system("git branch -d new-feature")
         os.system("git push origin --delete new-feature")
 
     def create_issues_from_readme(self):
         readme = File(Path("README.md"))
-        uncompleted_todos = readme.read_line_by_condition(lambda line: line.startswith("- [ ]"))
-        for todo in uncompleted_todos:
-            todo = todo.replace("- [ ] ", "")
-            todo = todo.replace("\n", "")
-            self.create_issue(todo)
+        uncompleted_Tasks = readme.read_line_by_condition(
+            lambda line: line.startswith("- [ ]"))
+        for Task in uncompleted_Tasks:
+            Task = Task.replace("- [ ] ", "")
+            Task = Task.replace("\n", "")
+            self.create_issue(Task)
 
     def read_all_issues_on_github(self):
-        #TODO:
+        # Task:
         self.workflow_ui.pp("reading all the issues that are still open 📑")
         os.system("gh repo list")
-   
-    def read_todos_from_readme(self):
+
+    def read_Tasks_from_readme(self):
         readme = File(Path("README.md"))
-        uncompleted_todos = readme.read_line_by_condition(lambda line: line.startswith("- [ ]"))
-        completed_todos = readme.read_line_by_condition(lambda line: line.startswith("- [x]"))
-        for todos in completed_todos:
-            title = todos.replace("- [x] ", "")
+        uncompleted_Tasks = readme.read_line_by_condition(
+            lambda line: line.startswith("- [ ]"))
+        completed_Tasks = readme.read_line_by_condition(
+            lambda line: line.startswith("- [x]"))
+        for Tasks in completed_Tasks:
+            title = Tasks.replace("- [x] ", "")
             print(f"✅ {title}")
             print("")
-        for todos in uncompleted_todos:
-            title = todos.replace("- [ ] ", "")
+        for Tasks in uncompleted_Tasks:
+            title = Tasks.replace("- [ ] ", "")
             print(f"❌ {title}")
             print("")
 
-    def cross_todos_from_readme(self, title: str):
+    def cross_Tasks_from_readme(self, title: str):
         readme = File(Path("README.md"))
         readme_content = readme.readlines()
         readme.write("")
@@ -453,7 +467,7 @@ class GithubRepository:
                 0, len(code_commit_message_emojis) - 1)]
             commit_message = commit_message.replace("c ", " ")
 
-        elif commit_message.startswith("TODO:"):
+        elif commit_message.startswith("Task:"):
             message_prefix = ""
             message_suffix = "🔴🔴🔴"
 

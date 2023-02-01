@@ -1,7 +1,7 @@
 
 
-export interface Todo {
-  title: string;
-  description: string;
-  deadline: string;
+export interface Task {
+  description: "";
+  title: "";
+  deadline: "";
 }

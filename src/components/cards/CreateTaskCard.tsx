@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import { initialTodo } from "../../initial_data/Tasks";
+import { Task } from "../../types";
+import { initialTask } from "../../initialData";
 
+interface ICreateTaskCardProps {
+  onCreateTask: (task: Task) => void;
+}
 
-export default function CreateTaskCard(props: any) {
-  const [todo, setTodo] = useState(initialTodo);
+const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
+  props
+) => {
+  const [task, setTask] = useState(initialTask);
 
   const handleChangeName = (e: any) => {
-    setTodo((prevTodo) => {
-      return { ...prevTodo, description: e.target.value };
+    setTask((prevTask) => {
+      return { ...prevTask, description: e.target.value };
     });
   };
 
@@ -23,7 +29,7 @@ export default function CreateTaskCard(props: any) {
               <input
                 className="form-control"
                 type="text"
-                placeholder={todo.title}
+                placeholder={task.title}
                 id="example-text"
                 onChange={handleChangeName}
               />
@@ -55,7 +61,7 @@ export default function CreateTaskCard(props: any) {
           <button
             type="submit"
             className="btn btn-outline mt-2 text-bold"
-            onClick={() => props.onCreate(todo)}
+            onClick={() => props.onCreateTask(task)}
           >
             Add Task
           </button>
@@ -63,4 +69,6 @@ export default function CreateTaskCard(props: any) {
       </div>
     </>
   );
-}
+};
+
+export default CreateTaskCard;
