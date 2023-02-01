@@ -1,21 +1,16 @@
 import * as React from "react";
 
-interface IMenuButtonProps {}
+interface ISearchButtonProps {}
 
-const MenuButton: React.FunctionComponent<IMenuButtonProps> = (props) => {
+const SearchButton: React.FunctionComponent<ISearchButtonProps> = (props) => {
   return (
-    <button
-      aria-label="Menu"
-      aria-expanded="false"
-      className="btn"
-      type="button"
-    >
+    <button type="button" className="btn">
       <span data-component="text">
         <svg
           aria-hidden="true"
           focusable="false"
           role="img"
-          className="octicon octicon-three-bars"
+          className="octicon octicon-search"
           viewBox="0 0 16 16"
           width="16"
           height="16"
@@ -29,7 +24,7 @@ const MenuButton: React.FunctionComponent<IMenuButtonProps> = (props) => {
         >
           <path
             fill-rule="evenodd"
-            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+            d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"
           ></path>
         </svg>
       </span>
@@ -37,4 +32,4 @@ const MenuButton: React.FunctionComponent<IMenuButtonProps> = (props) => {
   );
 };
 
-export default MenuButton;
+export default SearchButton;

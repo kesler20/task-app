@@ -11,10 +11,20 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
 ) => {
   const [task, setTask] = useState(initialTask);
 
-  const handleChangeName = (e: any) => {
-    setTask((prevTask) => {
-      return { ...prevTask, description: e.target.value };
-    });
+  const handleChange = (e: any, key: string) => {
+    if (key === "description") {
+      setTask((prevTask: any) => {
+        return { ...prevTask, description: e.target.value };
+      });
+    } else if (key === "title") {
+      setTask((prevTask: any) => {
+        return { ...prevTask, title: e.target.value };
+      });
+    } else {
+      setTask((prevTask: any) => {
+        return { ...prevTask, deadline: e.target.value };
+      });
+    }
   };
 
   return (
@@ -31,7 +41,7 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
                 type="text"
                 placeholder={task.title}
                 id="example-text"
-                onChange={handleChangeName}
+                onChange={(e) => handleChange(e, "title")}
               />
             </div>
           </div>
@@ -41,14 +51,21 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
               <label htmlFor="example-select">Select a deadline</label>
             </div>
             <div className="form-group-body">
-              <select className="form-select" id="example-select">
+              <select
+                className="form-select"
+                id="example-select"
+                onChange={(e) => handleChange(e, "deadline")}
+              >
                 <option>Today</option>
                 <option>Tomorrow</option>
               </select>
             </div>
           </div>
           <div className="form-group">
-            <div className="form-group-header">
+            <div
+              className="form-group-header"
+              onChange={(e) => handleChange(e, "description")}
+            >
               <label htmlFor="example-textarea">Add a Description</label>
             </div>
             <div className="form-group-body">

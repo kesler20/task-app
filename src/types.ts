@@ -5,3 +5,7 @@ export interface Task {
   title: "";
   deadline: "";
 }
+
+export interface UnderlineNavs {
+  name : string
+}
