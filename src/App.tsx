@@ -2,61 +2,15 @@ import React, { useState } from "react";
 import "./App.css";
 import ThemeButton from "./components/buttons/ThemeButton";
 import MenuButton from "./components/buttons/MenuButton";
-
-const CreateTaskCard = () => {
-  return (
-    <>
-      <details className="details-reset details-overlay details-overlay-dark">
-        <summary className="btn" aria-haspopup="dialog">
-          Open dialog
-        </summary>
-        <div className="Box Box--overlay d-flex flex-column anim-fade-in fast">
-          <div className="Box-header">
-            <button
-              className="Box-btn-octicon btn-octicon float-right"
-              type="button"
-              aria-label="Close dialog"
-              data-close-dialog
-            >
-              <svg
-                className="octicon octicon-x"
-                viewBox="0 0 12 16"
-                version="1.1"
-                width="12"
-                height="16"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"
-                ></path>
-              </svg>
-            </button>
-            <h3 className="Box-title">Box title</h3>
-          </div>
-          <div className="overflow-auto">
-            <div className="Box-body overflow-auto">
-              <p>
-                The quick brown fox jumps over the lazy dog and feels as if he
-                were in the seventh heaven of typography together with Hermann
-                Zapf, the most famous artist of the...
-              </p>
-            </div>
-          </div>
-          <div className="Box-footer">
-            <button type="button" className="btn btn-block" data-close-dialog>
-              Okidoki
-            </button>
-          </div>
-        </div>
-      </details>
-    </>
-  );
-};
+import Counter from "./components/counter/Counter";
+import TodoComponent from "./components/todo/Todo";
+import CreateTaskCard from "./components/cards/CreateTaskCard";
+import { initialTodo } from "./initial_data/Tasks";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [displayCreateTaskCard, setDisplayCreateTaskCard] = useState(false);
+  const [todos, setTodos] = useState([initialTodo]);
   const toggleTheme = () => {
     const page = document.querySelector("html");
     if (darkMode) {
@@ -72,7 +26,13 @@ const App = () => {
   const createTask = () => {
     setDisplayCreateTaskCard((prevState) => !prevState);
   };
-  
+
+  const handleCreateTask = (todo: any) => {
+    setTodos(prevTodos => {
+      return [...prevTodos, todo];
+    });
+  };
+
   return (
     <div>
       <div className="Header">
@@ -109,19 +69,34 @@ const App = () => {
             <div className="Subhead">
               <h4 className="Subhead-heading">Back Log</h4>
             </div>
-            <code className="d-block mt-1 mb-3 color-fg-muted">
-              data-color-mode="auto" data-light-theme="light"
-              data-dark-theme="dark_dimmed"
-            </code>
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={createTask}
-            >
-              Create Task<span className="dropdown-caret"></span>
-            </button>
+            <div className="d-flex flex-justify-around flex-items-center">
+              <code className="d-block mt-1 mb-3 color-fg-muted">
+                number of tasks left in the backlog
+              </code>
+              <Counter
+                numberOfTasks={todos.length}
+                fewTasks={10}
+                manyTasks={20}
+                tooManyTasks={30}
+              />
+            </div>
+            <div className="position-relative text-center">
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={createTask}
+              >
+                Create Task<span className="dropdown-caret"></span>
+              </button>
+              {displayCreateTaskCard && (
+                <CreateTaskCard onCreate={handleCreateTask} />
+              )}
+            </div>
+            {todos.map((todo, index) => {
+              return <TodoComponent key={index} todo={todo} />;
+            })}
           </div>
-          {displayCreateTaskCard && <CreateTaskCard />}
+
           <div className="border p-4">In progress</div>
           <div className="border p-4">Completed</div>
         </div>
