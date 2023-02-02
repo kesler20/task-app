@@ -7,10 +7,11 @@ import { Task } from "./types";
 import CompletedTaskList from "./containers/CompletedTaskList";
 
 const App = () => {
+  const [tasksInBacklog, setTasksInBacklog] = useState([]);
   const [tasksInProgress, setTasksInProgress] = useState([]);
   const [tasksCompleted, setTasksCompleted] = useState([]);
 
-  const handleStartTask = (task: any): any => {
+  const handleStartTask = (task: Task): any => {
     setTasksInProgress([task as never]);
   };
 
@@ -34,7 +35,10 @@ const App = () => {
       <Navbar />
       <div className="d-flex flex-items-center flex-justify-center application__container">
         <div className="application__content">
-          <BackLogTaskList onStartTask={handleStartTask} />
+          <BackLogTaskList
+            onStartTask={handleStartTask}
+            tasksInBacklog={tasksInBacklog}
+          />
           <ProgressTaskList
             tasks={tasksInProgress}
             onAddTask={handleStartTask}
