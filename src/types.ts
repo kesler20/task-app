@@ -6,10 +6,6 @@ export interface Task {
   deadline: "";
 }
 
-export interface SubTask {
-  description: "";
-  title: "";
-}
 
 export interface UnderlineNavs {
   name : string

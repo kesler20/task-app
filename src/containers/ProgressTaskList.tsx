@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import Counter from "../components/counter/Counter";
-import TaskComponent from "../components/cards/TaskComponent";
-import CreateTaskCard from "../components/cards/CreateTaskCard";
+import TasksInPorgress from "../components/cards/TasksInProgress";
+import CreateSubTaskCard from "../components/cards/CreateSubTaskCard";
 import { InitialProgressPlaceholder } from "../initialData";
+import { Task } from "../types";
+import ReverseCounter from "../components/labels/ReverseCounter";
 
-interface IProgressTaskListProps {}
+interface IProgressTaskListProps {
+  tasks: Task[];
+  onAddTask: (e: any) => any;
+  onCreateSubTask: (e: any) => any;
+}
 
 const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
   props
 ) => {
-  const [tasks, setTasks] = useState([]);
-
   const [displayCreateTaskCard, setDisplayCreateTaskCard] = useState(false);
-
-  const handleCreateTask = (task: any): void => {
-    setTasks((prevTasks: any): any => {
-      return [...prevTasks, task];
-    });
+  const [displayCreateSubTaskCard, setDisplayCreateSubTaskCard] =
+    useState(false);
+  const handleViewDisplayCreateSubTaskCard = () => {
+    setDisplayCreateSubTaskCard((prevState) => !prevState);
   };
 
   return (
@@ -28,31 +30,38 @@ const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
         <code className="d-block mt-1 mb-3 color-fg-muted">
           # of tasks in progress
         </code>
-        <Counter
-          numberOfTasks={tasks.length}
+        <ReverseCounter
+          numberOfTasks={props.tasks.length}
           fewTasks={10}
           manyTasks={20}
           tooManyTasks={30}
         />
+        <button
+          className="btn btn-outline"
+          type="button"
+          onClick={handleViewDisplayCreateSubTaskCard}
+        >
+          create sub-task
+          <span className="dropdown-caret"></span>
+        </button>
       </div>
       <div className="position-relative text-center">
-        <button
-          className="btn btn-outline mt-2 text-bold"
-          type="button"
-          onClick={() => setDisplayCreateTaskCard((prevState) => !prevState)}
-        >
-          Add a Task<span className="dropdown-caret"></span>
-        </button>
-        {displayCreateTaskCard && (
-          <CreateTaskCard onCreateTask={handleCreateTask} />
+        {displayCreateSubTaskCard && (
+          <CreateSubTaskCard onCreateSubTask={props.onCreateSubTask} />
         )}
       </div>
-      <div className="tasks__container border mt-3">
-        {tasks.length === 0 ? (
+      <div className="tasks__container--progress border mt-3">
+        {props.tasks.length === 0 ? (
           <InitialProgressPlaceholder />
         ) : (
-          tasks.map((task, index) => {
-            return <TaskComponent key={index} taskInfo={task} />;
+          props.tasks.map((task, index) => {
+            return (
+              <TasksInPorgress
+                key={index}
+                taskInfo={task}
+                onCreateSubTask={props.onCreateSubTask}
+              />
+            );
           })
         )}
       </div>

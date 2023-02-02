@@ -1,9 +1,0 @@
-
-.task-list__container {
-  height: 660px;
-  overflow: hidden;
-}
-.tasks__container {
-  height: 450px;
-  overflow-y: scroll;
-}

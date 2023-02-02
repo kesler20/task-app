@@ -1,35 +1,20 @@
 import React, { useState } from "react";
 import { Task } from "../../types";
-import DeleteButton from "../buttons/DeleteButton";
 import UnderlineNav from "../navigation/UnderlineNav";
 import PopupCards from "./PopupCards";
+import CreateSubTaskCard from "./CreateSubTaskCard";
 
-interface ITaskProps {
+interface ITasksInPorgressProps {
   taskInfo: Task;
-  onStartTask: (e: any) => any;
-  onDeleteTask: (e: any) => any;
+  onCreateSubTask: (e: any) => any;
 }
 
-const DeskTopIcon = () => {
-  return (
-    <svg
-      className="octicon"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-      width="16"
-      height="16"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M1.75 2.5h12.5a.25.25 0 01.25.25v7.5a.25.25 0 01-.25.25H1.75a.25.25 0 01-.25-.25v-7.5a.25.25 0 01.25-.25zM14.25 1H1.75A1.75 1.75 0 000 2.75v7.5C0 11.216.784 12 1.75 12h3.727c-.1 1.041-.52 1.872-1.292 2.757A.75.75 0 004.75 16h6.5a.75.75 0 00.565-1.243c-.772-.885-1.193-1.716-1.292-2.757h3.727A1.75 1.75 0 0016 10.25v-7.5A1.75 1.75 0 0014.25 1zM9.018 12H6.982a5.72 5.72 0 01-.765 2.5h3.566a5.72 5.72 0 01-.765-2.5z"
-      ></path>
-    </svg>
-  );
-};
-
-const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
+const TasksInPorgress: React.FunctionComponent<ITasksInPorgressProps> = (
+  props
+) => {
   const [currentTab, setCurrentTab] = useState(true);
   const [viewDescription, setViewDescription] = useState(false);
+
   const handleChangeNav = () => {
     setCurrentTab((prevState) => !prevState);
   };
@@ -37,6 +22,7 @@ const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
   const handleViewDescription = () => {
     setViewDescription((prevState) => !prevState);
   };
+
 
   return (
     <div className="border p-4">
@@ -53,14 +39,12 @@ const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
       {currentTab ? (
         <div className="d-flex flex-justify-around m-3 flex-items-center">
           <button
-            className="btn btn-primary"
+            className="btn btn-outline btn-danger"
             type="button"
-            onClick={() => props.onStartTask(props.taskInfo)}
+            onClick={handleViewDescription}
           >
-            Start Task
-            <span className="dropdown-caret"></span>
+            complete task
           </button>
-          <DeleteButton text={"Delete"} onDeleteBtnClicked={props.onDeleteTask} />
         </div>
       ) : (
         <div className="d-flex flex-justify-around m-3 flex-items-center">
@@ -75,14 +59,14 @@ const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
             className="btn btn-outline mr-2"
             href="https://github.com/kesler20/task-app"
           >
-            <DeskTopIcon />
-            <span>Check SOP</span>
+            <span>Launch Timer</span>
           </a>
         </div>
       )}
+
       {viewDescription && <PopupCards text={props.taskInfo.description} />}
     </div>
   );
 };
 
-export default TaskComponent;
+export default TasksInPorgress;

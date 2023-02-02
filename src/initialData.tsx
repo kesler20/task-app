@@ -32,9 +32,23 @@ export const InitialProgressPlaceholder = () => {
       <h3 className="blankslate-heading">
         You don't seem to be working on any task.
       </h3>
-      <p>
-        Add a task to start working and cleaning the back log.
-      </p>
+      <p>Add a task to start working and cleaning the back log.</p>
+    </div>
+  );
+};
+
+export const InitialCompletedPlaceholder = () => {
+  return (
+    <div className="placeholder">
+      <img
+        src="https://github.com/probot.png"
+        className="img-responsive grayscale"
+        alt=""
+      />
+      <h3 className="blankslate-heading">
+        You don't seem to have completed any tasks.
+      </h3>
+      <p>Move some tasks in Progress and complete them to feel productive.</p>
     </div>
   );
 };

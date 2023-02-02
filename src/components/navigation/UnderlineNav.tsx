@@ -23,6 +23,7 @@ const UnderlineNav: React.FunctionComponent<IUnderlineNavProps> = (props) => {
           if (activeNav === index) {
             return (
               <button
+                key={index}
                 className="UnderlineNav-item"
                 role="tab"
                 type="button"
@@ -35,6 +36,7 @@ const UnderlineNav: React.FunctionComponent<IUnderlineNavProps> = (props) => {
           } else {
             return (
               <button
+                key={index}
                 className="UnderlineNav-item"
                 role="tab"
                 type="button"

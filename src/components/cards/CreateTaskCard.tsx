@@ -62,14 +62,16 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
             </div>
           </div>
           <div className="form-group">
-            <div
-              className="form-group-header"
-              onChange={(e) => handleChange(e, "description")}
-            >
-              <label htmlFor="example-textarea">Add a Description</label>
+            <div className="form-group-header">
+              <label
+                htmlFor="example-textarea"
+                >
+                Add a Description
+              </label>
             </div>
             <div className="form-group-body">
               <textarea
+                onChange={(e) => handleChange(e, "description")}
                 className="form-control"
                 id="example-textarea"
               ></textarea>

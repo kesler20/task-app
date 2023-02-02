@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
-import { Task } from '../../types';
-import { initialTask } from '../../initialData';
+import React, { useState } from "react";
+import { Task } from "../../types";
+import { initialTask } from "../../initialData";
 
 interface ICreateSubTaskCardProps {
-  onCreateTask: (task: Task) => void;
+  onCreateSubTask: (task: Task) => void;
 }
 
-const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (props) => {
+const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (
+  props
+) => {
   const [task, setTask] = useState(initialTask);
 
   const handleChange = (e: any, key: string) => {
@@ -31,6 +33,21 @@ const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (pro
         <div className="Popover-message Popover-message--large text-left p-4 mt-2 Box color-shadow-large">
           <div className="form-group">
             <div className="form-group-header">
+              <label htmlFor="example-text">Enter task name</label>
+            </div>
+            <div className="form-group-body">
+              <input
+                className="form-control"
+                type="text"
+                placeholder={task.title}
+                id="example-text"
+                onChange={(e) => handleChange(e, "title")}
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="form-group-header">
               <label htmlFor="example-text">Enter sub-task name</label>
             </div>
             <div className="form-group-body">
@@ -45,14 +62,12 @@ const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (pro
           </div>
 
           <div className="form-group">
-            <div
-              className="form-group-header"
-              onChange={(e) => handleChange(e, "description")}
-            >
+            <div className="form-group-header">
               <label htmlFor="example-textarea">Add a Description</label>
             </div>
             <div className="form-group-body">
               <textarea
+                onChange={(e) => handleChange(e, "description")}
                 className="form-control"
                 id="example-textarea"
               ></textarea>
@@ -61,7 +76,7 @@ const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (pro
           <button
             type="submit"
             className="btn btn-outline mt-2 text-bold"
-            onClick={() => props.onCreateTask(task)}
+            onClick={() => props.onCreateSubTask(task)}
           >
             Add Sub-task
           </button>
