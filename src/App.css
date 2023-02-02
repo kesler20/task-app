@@ -40,18 +40,14 @@
 }
 
 .task-list__container {
-  height: 660px;
+  height: 720px;
   overflow: hidden;
 }
 .tasks__container {
-  height: 450px;
-  overflow-y: scroll;
-}
-
-.tasks__container--progress {
   height: 480px;
   overflow-y: scroll;
 }
+
 
 @media (max-width : 1200px) {
   .application__content {

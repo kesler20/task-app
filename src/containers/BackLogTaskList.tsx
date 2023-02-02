@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Counter from "../components/labels/Counter";
-import TaskComponent from "../components/cards/TaskComponent";
+import TaskInBackLog from "../components/cards/TaskInBackLog";
 import CreateTaskCard from "../components/cards/CreateTaskCard";
 import { InitialBacklogPlaceholder } from "../initialData";
 
@@ -65,7 +65,7 @@ const BackLogTaskList = (props: any) => {
         ) : (
           tasks.map((task, index) => {
             return (
-              <TaskComponent
+              <TaskInBackLog
                 key={index}
                 taskInfo={task}
                 onStartTask={() => onStartTask(task, index)}

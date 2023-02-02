@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import BackLogTaskList from "./containers/Tasklist";
+import BackLogTaskList from "./containers/BackLogTaskList";
 import Navbar from "./components/navigation/Navbar";
 import ProgressTaskList from "./containers/ProgressTaskList";
 import { Task } from "./types";
@@ -18,9 +18,16 @@ const App = () => {
     setTasksCompleted([]);
   };
 
-  const handleCreateSubTask = (val : any) => {
-    console.log(val)
-  }
+  const handleCreateSubTask = (val: any) => {
+    console.log(val);
+  };
+
+  const handleCompleteTask = (task: Task) => {
+    setTasksInProgress([]);
+    setTasksCompleted((prevState: any): any => {
+      return [...prevState, task];
+    });
+  };
 
   return (
     <div>
@@ -32,6 +39,7 @@ const App = () => {
             tasks={tasksInProgress}
             onAddTask={handleStartTask}
             onCreateSubTask={handleCreateSubTask}
+            onCompleteTask={handleCompleteTask}
           />
           <CompletedTaskList
             onClearTasks={handleClearCompletedTasks}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TasksInPorgress from "../components/cards/TasksInProgress";
+import TasksInPorgress from "../components/cards/TaskInProgress";
 import CreateSubTaskCard from "../components/cards/CreateSubTaskCard";
 import { InitialProgressPlaceholder } from "../initialData";
 import { Task } from "../types";
@@ -9,6 +9,7 @@ interface IProgressTaskListProps {
   tasks: Task[];
   onAddTask: (e: any) => any;
   onCreateSubTask: (e: any) => any;
+  onCompleteTask: (e: Task) => any;
 }
 
 const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
@@ -46,10 +47,13 @@ const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
       </div>
       <div className="position-relative text-center">
         {displayCreateSubTaskCard && (
-          <CreateSubTaskCard onCreateSubTask={props.onCreateSubTask} />
+          <CreateSubTaskCard
+            onCreateSubTask={props.onCreateSubTask}
+            task={props.tasks[0]}
+          />
         )}
       </div>
-      <div className="tasks__container--progress border mt-3">
+      <div className="tasks__container border mt-3">
         {props.tasks.length === 0 ? (
           <InitialProgressPlaceholder />
         ) : (
@@ -59,6 +63,7 @@ const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
                 key={index}
                 taskInfo={task}
                 onCreateSubTask={props.onCreateSubTask}
+                onCompleteTask={() => props.onCompleteTask(task)}
               />
             );
           })

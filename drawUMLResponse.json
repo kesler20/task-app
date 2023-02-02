@@ -1,0 +1,229 @@
+[
+  [
+    {
+      "id": "node-1",
+      "type": "umlDiagram",
+      "position": { "x": -346.83577093907843, "y": 196.28132862835548 },
+      "data": {
+        "objectName": "BackLogTaskList",
+        "color": "rgb(66, 164, 87)",
+        "comment": "props = { onStartTask : (task : Task) => any }",
+        "gridTable": [
+          {
+            "visibility": "+",
+            "signature": "tasks",
+            "returnType": "Array",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          },
+          {
+            "visibility": "+",
+            "signature": "displayCreateTaskCard",
+            "returnType": "boolean",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          },
+          {
+            "visibility": "+",
+            "signature": "handleCreateTask()",
+            "returnType": "void",
+            "comment": "event handler for the onCreateTask event triggered by the CreateTaskCard when a task is created",
+            "params": [{ "name": "task", "type": "Task" }]
+          },
+          {
+            "visibility": "+",
+            "signature": "handleDeleteTask()",
+            "returnType": "void",
+            "comment": "event handeler for the delteion of the task triggered by the onDeleteTask event raised by the TaskComponent",
+            "params": [{ "name": "taskId", "type": "number" }]
+          },
+          {
+            "visibility": "+",
+            "signature": "onStartTask()",
+            "returnType": "void",
+            "comment": "raise the onStartTask event which is a prop of the component, this also calls the handleDeleteTask() method",
+            "params": [
+              { "name": "task", "type": "Task" },
+              { "name": "taskId", "type": "number" }
+            ]
+          }
+        ],
+        "connection": false
+      },
+      "width": 500,
+      "height": 324,
+      "selected": false,
+      "positionAbsolute": { "x": -346.83577093907843, "y": 196.28132862835548 },
+      "dragging": false
+    },
+    {
+      "id": "node-2",
+      "type": "umlDiagram",
+      "position": { "x": 120.70948677204251, "y": 677.2241656275708 },
+      "data": {
+        "objectName": "ProgressTaskList",
+        "comment": "Object Description",
+        "color": "rgb(73, 172, 57)",
+        "gridTable": [
+          {
+            "visibility": "+",
+            "signature": "displayCreateSubTaskCard",
+            "returnType": "boolean",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          }
+        ]
+      },
+      "width": 500,
+      "height": 119,
+      "selected": false,
+      "positionAbsolute": { "x": 120.70948677204251, "y": 677.2241656275708 },
+      "dragging": false
+    },
+    {
+      "id": "node-3",
+      "type": "umlDiagram",
+      "position": { "x": 1059.0528466941657, "y": 487.21549370892274 },
+      "data": {
+        "objectName": "Task",
+        "comment": "Object Description",
+        "color": "rgb(122, 62, 54)",
+        "gridTable": [
+          {
+            "visibility": "+",
+            "signature": "title",
+            "returnType": "string",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          },
+          {
+            "visibility": "+",
+            "signature": "description",
+            "returnType": "string",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          },
+          {
+            "visibility": "+",
+            "signature": "deadline",
+            "returnType": "string",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          }
+        ]
+      },
+      "width": 500,
+      "height": 222,
+      "selected": false,
+      "positionAbsolute": { "x": 1059.0528466941657, "y": 487.21549370892274 },
+      "dragging": false
+    },
+    {
+      "id": "node-4",
+      "type": "umlDiagram",
+      "position": { "x": 915.6809186526864, "y": 86.07547186963302 },
+      "data": {
+        "objectName": "CreateTaskCard",
+        "comment": "props = { onCreateTask : (task: Task) => void } ",
+        "color": "rgb(148, 178, 12)",
+        "gridTable": [
+          {
+            "visibility": "+",
+            "signature": "task",
+            "returnType": "Task",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          },
+          {
+            "visibility": "+",
+            "signature": "handleChange",
+            "returnType": "void",
+            "comment": "this is the event handler for all the changes to each property of the task object, i.e. title, description,, deadline",
+            "params": [
+              { "name": "e", "type": "Event" },
+              { "name": "key", "type": "string" }
+            ]
+          }
+        ]
+      },
+      "width": 500,
+      "height": 171,
+      "selected": false,
+      "positionAbsolute": { "x": 915.6809186526864, "y": 86.07547186963302 },
+      "dragging": false
+    },
+    {
+      "id": "node-5",
+      "type": "umlDiagram",
+      "position": { "x": 10, "y": 10 },
+      "data": {
+        "objectName": "PopupCards",
+        "comment": "Object Description",
+        "color": "rgb(11, 169, 62)",
+        "gridTable": [
+          {
+            "visibility": "+",
+            "signature": "text",
+            "returnType": "string",
+            "comment": "signature description",
+            "params": [{ "name": "name", "type": "type" }]
+          }
+        ]
+      },
+      "width": 500,
+      "height": 119,
+      "selected": false
+    }
+  ],
+  [
+    {
+      "source": "node-3",
+      "sourceHandle": "100aTask",
+      "target": "node-1",
+      "targetHandle": "300bBackLogTaskListonStartTask()",
+      "id": "reactflow__edge-node-3100aTask-node-1300bBackLogTaskListonStartTask()"
+    },
+    {
+      "source": "node-3",
+      "sourceHandle": "100aTask",
+      "target": "node-1",
+      "targetHandle": "250bBackLogTaskListhandleDeleteTask()",
+      "id": "reactflow__edge-node-3100aTask-node-1250bBackLogTaskListhandleDeleteTask()"
+    },
+    {
+      "source": "node-3",
+      "sourceHandle": "100aTask",
+      "target": "node-1",
+      "targetHandle": "200bBackLogTaskListhandleCreateTask()",
+      "id": "reactflow__edge-node-3100aTask-node-1200bBackLogTaskListhandleCreateTask()"
+    },
+    {
+      "source": "node-3",
+      "sourceHandle": "200aTaskdeadline",
+      "target": "node-1",
+      "targetHandle": "300bBackLogTaskListonStartTask()",
+      "id": "reactflow__edge-node-3200aTaskdeadline-node-1300bBackLogTaskListonStartTask()"
+    },
+    {
+      "source": "node-3",
+      "sourceHandle": "100aTasktitle",
+      "target": "node-1",
+      "targetHandle": "100bBackLogTaskListtasks",
+      "id": "reactflow__edge-node-3100aTasktitle-node-1100bBackLogTaskListtasks"
+    },
+    {
+      "source": "node-3",
+      "sourceHandle": "100aTasktitle",
+      "target": "node-1",
+      "targetHandle": "200bBackLogTaskListhandleCreateTask()",
+      "id": "reactflow__edge-node-3100aTasktitle-node-1200bBackLogTaskListhandleCreateTask()"
+    },
+    {
+      "source": "node-3",
+      "sourceHandle": "150aTaskdescription",
+      "target": "node-1",
+      "targetHandle": "200bBackLogTaskListhandleCreateTask()",
+      "id": "reactflow__edge-node-3150aTaskdescription-node-1200bBackLogTaskListhandleCreateTask()"
+    }
+  ]
+]

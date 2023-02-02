@@ -1,28 +1,34 @@
 import React, { useState } from "react";
 import { Task } from "../../types";
-import { initialTask } from "../../initialData";
+import { SubTask } from "../../types";
 
 interface ICreateSubTaskCardProps {
-  onCreateSubTask: (task: Task) => void;
+  onCreateSubTask: (subTask: SubTask) => void;
+  task: Task;
 }
 
 const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (
   props
 ) => {
-  const [task, setTask] = useState(initialTask);
+  const [subTask, setSubTask] = useState({
+    task: props.task.title,
+    title: "",
+    description: "",
+    SOP: props.task.title,
+  } as SubTask);
 
   const handleChange = (e: any, key: string) => {
     if (key === "description") {
-      setTask((prevTask: any) => {
+      setSubTask((prevTask: any) => {
         return { ...prevTask, description: e.target.value };
       });
     } else if (key === "title") {
-      setTask((prevTask: any) => {
+      setSubTask((prevTask: any) => {
         return { ...prevTask, title: e.target.value };
       });
     } else {
-      setTask((prevTask: any) => {
-        return { ...prevTask, deadline: e.target.value };
+      setSubTask((prevTask: any) => {
+        return { ...prevTask, task: e.target.value };
       });
     }
   };
@@ -39,9 +45,9 @@ const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (
               <input
                 className="form-control"
                 type="text"
-                placeholder={task.title}
+                placeholder={props.task.title}
                 id="example-text"
-                onChange={(e) => handleChange(e, "title")}
+                onChange={(e) => handleChange(e, "task")}
               />
             </div>
           </div>
@@ -54,7 +60,7 @@ const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (
               <input
                 className="form-control"
                 type="text"
-                placeholder={task.title}
+                placeholder={subTask.title}
                 id="example-text"
                 onChange={(e) => handleChange(e, "title")}
               />
@@ -76,7 +82,7 @@ const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (
           <button
             type="submit"
             className="btn btn-outline mt-2 text-bold"
-            onClick={() => props.onCreateSubTask(task)}
+            onClick={() => props.onCreateSubTask(subTask)}
           >
             Add Sub-task
           </button>

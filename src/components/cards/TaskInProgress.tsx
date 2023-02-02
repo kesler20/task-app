@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Task } from "../../types";
 import UnderlineNav from "../navigation/UnderlineNav";
 import PopupCards from "./PopupCards";
-import CreateSubTaskCard from "./CreateSubTaskCard";
 
-interface ITasksInPorgressProps {
+interface ITaskInPorgressProps {
   taskInfo: Task;
   onCreateSubTask: (e: any) => any;
+  onCompleteTask: (e: any) => any;
 }
 
-const TasksInPorgress: React.FunctionComponent<ITasksInPorgressProps> = (
+const TasksInPorgress: React.FunctionComponent<ITaskInPorgressProps> = (
   props
 ) => {
   const [currentTab, setCurrentTab] = useState(true);
@@ -23,6 +23,13 @@ const TasksInPorgress: React.FunctionComponent<ITasksInPorgressProps> = (
     setViewDescription((prevState) => !prevState);
   };
 
+  const onCompleteTask = (e: any) => {
+    props.onCompleteTask(e);
+    localStorage.setItem(
+      `end ${props.taskInfo.title}`,
+      JSON.stringify(Date.now())
+    );
+  };
 
   return (
     <div className="border p-4">
@@ -38,10 +45,13 @@ const TasksInPorgress: React.FunctionComponent<ITasksInPorgressProps> = (
       />
       {currentTab ? (
         <div className="d-flex flex-justify-around m-3 flex-items-center">
+          <a className="btn btn-outline" href={`${props.taskInfo.SOP}`}>
+            View SOP
+          </a>
           <button
             className="btn btn-outline btn-danger"
             type="button"
-            onClick={handleViewDescription}
+            onClick={onCompleteTask}
           >
             complete task
           </button>

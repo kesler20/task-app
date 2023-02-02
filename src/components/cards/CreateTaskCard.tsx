@@ -20,6 +20,10 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
       setTask((prevTask: any) => {
         return { ...prevTask, title: e.target.value };
       });
+    } else if (key === "SOP") {
+      setTask((prevTask: any) => {
+        return { ...prevTask, SOP: e.target.value };
+      });
     } else {
       setTask((prevTask: any) => {
         return { ...prevTask, deadline: e.target.value };
@@ -48,6 +52,21 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
 
           <div className="form-group">
             <div className="form-group-header">
+              <label htmlFor="example-text">Add SOP</label>
+            </div>
+            <div className="form-group-body">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="SOP URL"
+                id="example-text"
+                onChange={(e) => handleChange(e, "SOP")}
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="form-group-header">
               <label htmlFor="example-select">Select a deadline</label>
             </div>
             <div className="form-group-body">
@@ -63,11 +82,7 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
           </div>
           <div className="form-group">
             <div className="form-group-header">
-              <label
-                htmlFor="example-textarea"
-                >
-                Add a Description
-              </label>
+              <label htmlFor="example-textarea">Add a Description</label>
             </div>
             <div className="form-group-body">
               <textarea

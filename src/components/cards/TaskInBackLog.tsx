@@ -27,7 +27,7 @@ const DeskTopIcon = () => {
   );
 };
 
-const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
+const TaskInBackLog: React.FunctionComponent<ITaskProps> = (props) => {
   const [currentTab, setCurrentTab] = useState(true);
   const [viewDescription, setViewDescription] = useState(false);
   const handleChangeNav = () => {
@@ -36,6 +36,15 @@ const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
 
   const handleViewDescription = () => {
     setViewDescription((prevState) => !prevState);
+  };
+
+  const onStartTask = () => {
+    props.onStartTask(props.taskInfo);
+    // start timer
+    localStorage.setItem(
+      `start ${props.taskInfo.title}`,
+      JSON.stringify(Date.now())
+    );
   };
 
   return (
@@ -55,12 +64,15 @@ const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
           <button
             className="btn btn-primary"
             type="button"
-            onClick={() => props.onStartTask(props.taskInfo)}
+            onClick={onStartTask}
           >
             Start Task
             <span className="dropdown-caret"></span>
           </button>
-          <DeleteButton text={"Delete"} onDeleteBtnClicked={props.onDeleteTask} />
+          <DeleteButton
+            text={"Delete"}
+            onDeleteBtnClicked={props.onDeleteTask}
+          />
         </div>
       ) : (
         <div className="d-flex flex-justify-around m-3 flex-items-center">
@@ -71,10 +83,7 @@ const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
           >
             View Description
           </button>
-          <a
-            className="btn btn-outline mr-2"
-            href="https://github.com/kesler20/task-app"
-          >
+          <a className="btn btn-outline mr-2" href={`${props.taskInfo.SOP}`}>
             <DeskTopIcon />
             <span>Check SOP</span>
           </a>
@@ -85,4 +94,4 @@ const TaskComponent: React.FunctionComponent<ITaskProps> = (props) => {
   );
 };
 
-export default TaskComponent;
+export default TaskInBackLog;
