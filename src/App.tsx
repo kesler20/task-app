@@ -3,13 +3,27 @@ import "./App.css";
 import BackLogTaskList from "./containers/BackLogTaskList";
 import Navbar from "./components/navigation/Navbar";
 import ProgressTaskList from "./containers/ProgressTaskList";
-import { Task } from "./types";
+import { SubTask, Task } from "./types";
 import CompletedTaskList from "./containers/CompletedTaskList";
 
 const App = () => {
-  const [tasksInBacklog, setTasksInBacklog] = useState([]);
-  const [tasksInProgress, setTasksInProgress] = useState([]);
-  const [tasksCompleted, setTasksCompleted] = useState([]);
+  const [tasksInBacklog, setTasksInBacklog] = useState<Task[]>([]);
+  const [tasksInProgress, setTasksInProgress] = useState<Task[]>([]);
+  const [tasksCompleted, setTasksCompleted] = useState<Task[]>([]);
+  const [subTasks, setSubtasks] = useState<SubTask[]>([]);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  const toggleTheme = () => {
+    const page = document.querySelector("html");
+    if (darkMode) {
+      page?.setAttribute("data-color-module", "dark");
+      page?.setAttribute("data-dark-theme", "dark_dimmed");
+    } else {
+      page?.removeAttribute("data-color-module");
+      page?.removeAttribute("data-dark-theme");
+    }
+    setDarkMode((prevState) => !prevState);
+  };
 
   const handleStartTask = (task: Task): any => {
     setTasksInProgress([task as never]);
@@ -19,20 +33,29 @@ const App = () => {
     setTasksCompleted([]);
   };
 
-  const handleCreateSubTask = (val: any) => {
-    console.log(val);
+  const handleCreateSubTask = (subTask: SubTask) => {
+    setSubtasks((prevState) => {
+      return [...prevState, subTask];
+    });
   };
 
   const handleCompleteTask = (task: Task) => {
     setTasksInProgress([]);
-    setTasksCompleted((prevState: any): any => {
+    setTasksCompleted((prevState) => {
       return [...prevState, task];
+    });
+  };
+
+  const handleDeleteSubTask = (subTaskId: number) => {
+    console.log(subTaskId);
+    setSubtasks((prevSubTasks) => {
+      return prevSubTasks.filter((prevSubTasks, index) => index !== subTaskId);
     });
   };
 
   return (
     <div>
-      <Navbar />
+      <Navbar darkMode={darkMode} onToggleTheme={toggleTheme} />
       <div className="d-flex flex-items-center flex-justify-center application__container">
         <div className="application__content">
           <BackLogTaskList
@@ -41,9 +64,11 @@ const App = () => {
           />
           <ProgressTaskList
             tasks={tasksInProgress}
+            subTasks={subTasks}
             onAddTask={handleStartTask}
             onCreateSubTask={handleCreateSubTask}
             onCompleteTask={handleCompleteTask}
+            onDeleteSubTask={handleDeleteSubTask}
           />
           <CompletedTaskList
             onClearTasks={handleClearCompletedTasks}

@@ -14,7 +14,6 @@ const CreateSubTaskCard: React.FunctionComponent<ICreateSubTaskCardProps> = (
     task: props.task.title,
     title: "",
     description: "",
-    SOP: props.task.title,
   } as SubTask);
 
   const handleChange = (e: any, key: string) => {

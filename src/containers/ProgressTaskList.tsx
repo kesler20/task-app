@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import TasksInPorgress from "../components/cards/TaskInProgress";
 import CreateSubTaskCard from "../components/cards/CreateSubTaskCard";
 import { InitialProgressPlaceholder } from "../initialData";
-import { Task } from "../types";
+import { SubTask, Task } from "../types";
 import ReverseCounter from "../components/labels/ReverseCounter";
+import SubTaskComponent from "../components/cards/SubTaskComponent";
 
 interface IProgressTaskListProps {
   tasks: Task[];
+  subTasks: SubTask[];
   onAddTask: (e: any) => any;
   onCreateSubTask: (e: any) => any;
   onCompleteTask: (e: Task) => any;
+  onDeleteSubTask: (subTaskId: number) => any;
 }
 
 const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
@@ -68,6 +71,15 @@ const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
             );
           })
         )}
+        {props.subTasks.map((subTask, index) => {
+          return (
+            <SubTaskComponent
+              key={index}
+              subTask={subTask}
+              onDeleteSubTask={() => props.onDeleteSubTask(index)}
+            />
+          );
+        })}
       </div>
     </div>
   );

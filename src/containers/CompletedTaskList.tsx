@@ -10,9 +10,18 @@ interface ICompletedTaskListProps {
   onClearTasks: (e: any) => any;
 }
 
+/**
+ * @param props { tasks , onClearTasks }
+ */
 const CompletedTaskList: React.FunctionComponent<ICompletedTaskListProps> = (
   props
 ) => {
+
+  /**
+   * get the time elapsed since the completed task started
+   * @param {Task} task 
+   * @returns {number} Math.floor((JSON.parse(end) - JSON.parse(start)) / 1000)
+   */
   const getTimeElapsed = (task: Task): number => {
     let start = localStorage.getItem(`start ${task.title}`);
     let end = localStorage.getItem(`end ${task.title}`);

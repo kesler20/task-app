@@ -2,23 +2,12 @@ import React, { useState } from "react";
 import ThemeButton from "../buttons/ThemeButton";
 import MenuButton from "../buttons/MenuButton";
 
-interface INavbarProps {}
+interface INavbarProps {
+  darkMode: boolean;
+  onToggleTheme: (e: any) => any;
+}
 
 const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleTheme = () => {
-    const page = document.querySelector("html");
-    if (darkMode) {
-      page?.setAttribute("data-color-module", "dark");
-      page?.setAttribute("data-dark-theme", "dark_dimmed");
-    } else {
-      page?.removeAttribute("data-color-module");
-      page?.removeAttribute("data-dark-theme");
-    }
-    setDarkMode((prevState) => !prevState);
-  };
-
   return (
     <div className="Header">
       <div className="Header-item">
@@ -32,7 +21,10 @@ const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
       </div>
       <div className="Header-item Header-item--full"></div>
       <div className="Header-item mr-0 flex-justify-between menu-buttons">
-        <ThemeButton darkMode={darkMode} toggleTheme={toggleTheme} />
+        <ThemeButton
+          darkMode={props.darkMode}
+          toggleTheme={props.onToggleTheme}
+        />
         <MenuButton />
       </div>
     </div>
