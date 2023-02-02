@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReverseCounter from "../components/labels/ReverseCounter";
 import { Task } from "../types";
 import { InitialCompletedPlaceholder } from "../initialData";

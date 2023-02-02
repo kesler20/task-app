@@ -14,7 +14,6 @@ interface IProgressTaskListProps {
 const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
   props
 ) => {
-  const [displayCreateTaskCard, setDisplayCreateTaskCard] = useState(false);
   const [displayCreateSubTaskCard, setDisplayCreateSubTaskCard] =
     useState(false);
   const handleViewDisplayCreateSubTaskCard = () => {

@@ -20,7 +20,7 @@ const BackLogTaskList = (props: any) => {
     } else {
       setTasks((prevTasks) => {
         return prevTasks.filter(
-          (prevTask, prevTaskId) => !prevTaskId == taskId
+          (prevTask, prevTaskId) => !prevTaskId === taskId
         );
       });
     }
