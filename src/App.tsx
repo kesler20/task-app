@@ -54,7 +54,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <>
       <Navbar darkMode={darkMode} onToggleTheme={toggleTheme} />
       <div className="d-flex flex-items-center flex-justify-center application__container">
         <div className="application__content">
@@ -76,7 +76,7 @@ const App = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

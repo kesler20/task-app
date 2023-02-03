@@ -75,6 +75,7 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
                 id="example-select"
                 onChange={(e) => handleChange(e, "deadline")}
               >
+                <option>Deadline</option>
                 <option>Today</option>
                 <option>Tomorrow</option>
               </select>

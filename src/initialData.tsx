@@ -57,5 +57,5 @@ export const initialTask: Task = {
   description: "",
   title: "",
   deadline: "",
-  SOP: "https://onedrive.live.com/redir?resid=D6E96D5E52A0D29C%211352460&page=Edit&wd=target%28New%20Section%201.one%7C31aecaab-bf62-45ca-9b3b-0b2f4b8b7a94%2FDesign%7Ca7768af7-56ad-cf41-b0d3-385f1f97da45%2F%29&wdorigin=NavigationUrl",
+  SOP: "https://onedrive.live.com/redir?resid=D6E96D5E52A0D29C%21642412&page=Edit&wd=target%28index.one%7Ca189e21c-c8dc-4aca-96af-3c19f4165bde%2FRoutine%7C28a8a1ee-e79c-4255-adf9-289174bcefbf%2F%29&wdorigin=NavigationUrl",
 };

@@ -67,7 +67,7 @@ const TasksInPorgress: React.FunctionComponent<ITaskInPorgressProps> = (
           </button>
           <a
             className="btn btn-outline mr-2"
-            href="https://github.com/kesler20/task-app"
+            href="https://pomofocus.io"
           >
             <span>Launch Timer</span>
           </a>
