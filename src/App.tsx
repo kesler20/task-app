@@ -7,13 +7,15 @@ import { SubTask, Task } from "./types";
 import CompletedTaskList from "./containers/CompletedTaskList";
 import { useStoredValue } from "./customHooks";
 
-
 const App = () => {
   const [tasksInBacklog, setTasksInBacklog] = useState<Task[]>([]);
-  const [tasksInProgress, setTasksInProgress] = useStoredValue([],"tasksInProgress");
+  const [tasksInProgress, setTasksInProgress] = useStoredValue(
+    [],
+    "tasksInProgress"
+  );
   const [tasksCompleted, setTasksCompleted] = useState<Task[]>([]);
-  const [subTasks, setSubtasks] = useStoredValue([],"subTasks");
-  const [darkMode, setDarkMode] = useStoredValue(false,"darkMode");
+  const [subTasks, setSubtasks] = useStoredValue([], "subTasks");
+  const [darkMode, setDarkMode] = useStoredValue(false, "darkMode");
 
   //TODO: this can be turned into a custom hook wit the taskInBackLog
   useEffect(() => {
@@ -58,7 +60,7 @@ const App = () => {
       page?.removeAttribute("data-color-module");
       page?.removeAttribute("data-dark-theme");
     }
-    setDarkMode((prevState) => !prevState);
+    setDarkMode(!darkMode);
   };
 
   const handleStartTask = (task: Task): any => {
@@ -73,9 +75,7 @@ const App = () => {
   };
 
   const handleCreateSubTask = (subTask: SubTask) => {
-    setSubtasks((prevState) => {
-      return [...prevState, subTask];
-    });
+    setSubtasks([...subTasks, subTask]);
   };
 
   const handleCompleteTask = (task: Task) => {
@@ -87,7 +87,7 @@ const App = () => {
 
   const handleDeleteSubTask = (subTaskId: number) => {
     console.log(subTaskId);
-    setSubtasks(subTasks.filter((subTask, index) => index !== subTaskId))
+    setSubtasks(subTasks.filter((subTask: any, index: number) => index !== subTaskId));
   };
 
   return (
