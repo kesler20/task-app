@@ -23,7 +23,12 @@ const TasksInPorgress: React.FunctionComponent<ITaskInPorgressProps> = (
     setViewDescription((prevState) => !prevState);
   };
 
-  const onCompleteTask = (e: any) => {
+  const onCompleteTask = async (e: any, task: Task) => {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task/complete`, {
+      method: "POST",
+      body: JSON.stringify(task),
+    });
+
     props.onCompleteTask(e);
     localStorage.setItem(
       `end ${props.taskInfo.title}`,
@@ -51,7 +56,7 @@ const TasksInPorgress: React.FunctionComponent<ITaskInPorgressProps> = (
           <button
             className="btn btn-outline btn-danger"
             type="button"
-            onClick={onCompleteTask}
+            onClick={(e) => onCompleteTask(e, props.taskInfo)}
           >
             complete task
           </button>
@@ -65,10 +70,7 @@ const TasksInPorgress: React.FunctionComponent<ITaskInPorgressProps> = (
           >
             View Description
           </button>
-          <a
-            className="btn btn-outline mr-2"
-            href="https://pomofocus.io"
-          >
+          <a className="btn btn-outline mr-2" href="https://pomofocus.io">
             <span>Launch Timer</span>
           </a>
         </div>

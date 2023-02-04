@@ -11,6 +11,14 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
 ) => {
   const [task, setTask] = useState(initialTask);
 
+  const onCreateTask = async (task: Task) => {
+    props.onCreateTask(task);
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task`, {
+      method: "POST",
+      body: JSON.stringify(task),
+    });
+  };
+
   const handleChange = (e: any, key: string) => {
     if (key === "description") {
       setTask((prevTask: any) => {
@@ -96,7 +104,7 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
           <button
             type="submit"
             className="btn btn-outline mt-2 text-bold"
-            onClick={() => props.onCreateTask(task)}
+            onClick={() => onCreateTask(task)}
           >
             Add Task
           </button>

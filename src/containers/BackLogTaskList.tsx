@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Counter from "../components/labels/Counter";
 import TaskInBackLog from "../components/cards/TaskInBackLog";
 import CreateTaskCard from "../components/cards/CreateTaskCard";
@@ -10,9 +10,13 @@ import { Task } from "../types";
  * - { onStartTask : (task: Task) => any, tasksInBacklog : Task[] }
  */
 const BackLogTaskList = (props: any) => {
-  const [tasks, setTasks] = useState<Task[]>(props.tasksInBacklog);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [displayCreateTaskCard, setDisplayCreateTaskCard] =
     useState<boolean>(false);
+
+  useEffect(() => {
+    setTasks(props.tasksInBacklog);
+  }, [props.tasksInBacklog]);
 
   /**
    * event handler for the onCreateTask() event triggered by the <CreateTaskCard />
@@ -25,16 +29,29 @@ const BackLogTaskList = (props: any) => {
   };
 
   /**
+   * sends a delete request for the task on the back long to the backend
+   * @param task
+   */
+  const sendDeleteRequest = async (task: Task) => {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task`, {
+      method: "DELETE",
+      body: JSON.stringify(task),
+    });
+  };
+
+  /**
    * event handler for the onDeleteTask event triggered by the <TaskInBackLog />
    * @param {number} taskId - this it the location of the task to delete in the backlog
    */
-  const handleDeleteTask = (taskId: number) => {
+  const handleDeleteTask = async (taskId: number) => {
+    sendDeleteRequest(tasks[taskId]);
+
     if (taskId === 0 && tasks?.length === 1) {
       setTasks([]);
     } else {
       setTasks((prevTasks: Task[]) => {
         return prevTasks.filter(
-          (prevTask: Task, prevTaskId: number) => prevTaskId === taskId
+          (prevTask: Task, prevTaskId: number) => prevTaskId !== taskId
         );
       });
     }
@@ -42,8 +59,8 @@ const BackLogTaskList = (props: any) => {
 
   /**
    * event invoked when the onStartTask() event is triggered by the <TaskInBackLog/>
-   * @param {Task} task 
-   * @param {number} taskId - this it the location of the task to delete in the backlog 
+   * @param {Task} task
+   * @param {number} taskId - this it the location of the task to delete in the backlog
    */
   const onStartTask = (task: Task, taskId: number) => {
     props.onStartTask(task);

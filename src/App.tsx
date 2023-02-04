@@ -1,17 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import BackLogTaskList from "./containers/BackLogTaskList";
 import Navbar from "./components/navigation/Navbar";
 import ProgressTaskList from "./containers/ProgressTaskList";
 import { SubTask, Task } from "./types";
 import CompletedTaskList from "./containers/CompletedTaskList";
+import { useStoredValue } from "./customHooks";
+
 
 const App = () => {
   const [tasksInBacklog, setTasksInBacklog] = useState<Task[]>([]);
-  const [tasksInProgress, setTasksInProgress] = useState<Task[]>([]);
+  const [tasksInProgress, setTasksInProgress] = useStoredValue([],"tasksInProgress");
   const [tasksCompleted, setTasksCompleted] = useState<Task[]>([]);
-  const [subTasks, setSubtasks] = useState<SubTask[]>([]);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [subTasks, setSubtasks] = useStoredValue([],"subTasks");
+  const [darkMode, setDarkMode] = useStoredValue(false,"darkMode");
+
+  //TODO: this can be turned into a custom hook wit the taskInBackLog
+  useEffect(() => {
+    const getTasksFromBackend = async () => {
+      await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task`)
+        .then((res) => {
+          console.log(res);
+          if (res.ok) {
+            res.json().then((res) => {
+              console.log(res);
+              setTasksInBacklog(res);
+            });
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task/complete`)
+        .then((res) => {
+          console.log(res);
+          if (res.ok) {
+            res.json().then((res) => {
+              console.log(res);
+              setTasksCompleted(res);
+            });
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    getTasksFromBackend();
+  }, []);
 
   const toggleTheme = () => {
     const page = document.querySelector("html");
@@ -29,8 +65,11 @@ const App = () => {
     setTasksInProgress([task as never]);
   };
 
-  const handleClearCompletedTasks = () => {
+  const handleClearCompletedTasks = async () => {
     setTasksCompleted([]);
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task/complete`, {
+      method: "DELETE",
+    });
   };
 
   const handleCreateSubTask = (subTask: SubTask) => {
@@ -48,9 +87,8 @@ const App = () => {
 
   const handleDeleteSubTask = (subTaskId: number) => {
     console.log(subTaskId);
-    setSubtasks((prevSubTasks) => {
-      return prevSubTasks.filter((prevSubTasks, index) => index !== subTaskId);
-    });
+    setSubtasks(subTasks.filter((subTasks, index) => index !== subTaskId))
+    };
   };
 
   return (
