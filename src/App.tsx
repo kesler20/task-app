@@ -20,7 +20,7 @@ const App = () => {
   //TODO: this can be turned into a custom hook wit the taskInBackLog
   useEffect(() => {
     const getTasksFromBackend = async () => {
-      await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task`)
+      await fetch(`${process.env.REACT_APP_BACKEND_URL_PROD}/task`)
         .then((res) => {
           console.log(res);
           if (res.ok) {
@@ -33,7 +33,7 @@ const App = () => {
         .catch((e) => {
           console.log(e);
         });
-      await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task/complete`)
+      await fetch(`${process.env.REACT_APP_BACKEND_URL_PROD}/task/complete`)
         .then((res) => {
           console.log(res);
           if (res.ok) {
@@ -69,7 +69,7 @@ const App = () => {
 
   const handleClearCompletedTasks = async () => {
     setTasksCompleted([]);
-    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task/complete`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_PROD}/task/complete`, {
       method: "DELETE",
     });
   };
@@ -87,7 +87,9 @@ const App = () => {
 
   const handleDeleteSubTask = (subTaskId: number) => {
     console.log(subTaskId);
-    setSubtasks(subTasks.filter((subTask: any, index: number) => index !== subTaskId));
+    setSubtasks(
+      subTasks.filter((subTask: any, index: number) => index !== subTaskId)
+    );
   };
 
   return (

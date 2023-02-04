@@ -33,7 +33,7 @@ const BackLogTaskList = (props: any) => {
    * @param task
    */
   const sendDeleteRequest = async (task: Task) => {
-    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_PROD}/task`, {
       method: "DELETE",
       body: JSON.stringify(task),
     });

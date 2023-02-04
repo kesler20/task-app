@@ -13,7 +13,7 @@ const CreateTaskCard: React.FunctionComponent<ICreateTaskCardProps> = (
 
   const onCreateTask = async (task: Task) => {
     props.onCreateTask(task);
-    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_PROD}/task`, {
       method: "POST",
       body: JSON.stringify(task),
     });

@@ -24,7 +24,7 @@ const TasksInPorgress: React.FunctionComponent<ITaskInPorgressProps> = (
   };
 
   const onCompleteTask = async (e: any, task: Task) => {
-    await fetch(`${process.env.REACT_APP_BACKEND_URL_DEV}/task/complete`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL_PROD}/task/complete`, {
       method: "POST",
       body: JSON.stringify(task),
     });
