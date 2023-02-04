@@ -87,7 +87,7 @@ const App = () => {
 
   const handleDeleteSubTask = (subTaskId: number) => {
     console.log(subTaskId);
-    setSubtasks(subTasks.filter((subTasks, index) => index !== subTaskId))
+    setSubtasks(subTasks.filter((subTask, index) => index !== subTaskId))
   };
 
   return (
