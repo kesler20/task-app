@@ -66,7 +66,7 @@ const App = () => {
   };
 
   const handleStartTask = (task: Task): any => {
-    setTasksInProgress([task as never]);
+    setTasksInProgress([task]);
   };
 
   const handleClearCompletedTasks = async () => {
