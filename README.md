@@ -1,5 +1,7 @@
 # Application Schema
 
+this is the url https://master.d3pgn5axatomxe.amplifyapp.com/
+
 Tasklist
 a collection of Tasks
 these can have a ranking algorithm for the various Tasks
