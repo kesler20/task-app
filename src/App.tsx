@@ -7,6 +7,8 @@ import { SubTask, Task } from "./types";
 import CompletedTaskList from "./containers/CompletedTaskList";
 import { useStoredValue } from "./customHooks";
 
+localStorage.clear()
+
 const App = () => {
   const [tasksInBacklog, setTasksInBacklog] = useState<Task[]>([]);
   const [tasksInProgress, setTasksInProgress] = useStoredValue(

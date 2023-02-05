@@ -3,6 +3,7 @@ import TasksInPorgress from "../components/cards/TaskInProgress";
 import CreateSubTaskCard from "../components/cards/CreateSubTaskCard";
 import { InitialProgressPlaceholder } from "../initialData";
 import { SubTask, Task } from "../types";
+import { initialTask } from "../initialData";
 import ReverseCounter from "../components/labels/ReverseCounter";
 import SubTaskComponent from "../components/cards/SubTaskComponent";
 
@@ -52,7 +53,7 @@ const ProgressTaskList: React.FunctionComponent<IProgressTaskListProps> = (
         {displayCreateSubTaskCard && (
           <CreateSubTaskCard
             onCreateSubTask={props.onCreateSubTask}
-            task={props.tasks[0]}
+            task={props.tasks[0] === undefined ? initialTask : props.tasks[0]}
           />
         )}
       </div>
